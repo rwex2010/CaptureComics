@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;AllKingFeaturesTests.java&apos; to &apos;CaptureImageProtoType/src/CaptureImages&apos;&#x0D;&#x0A;- Original project: &apos;CaptureImageProtoType&apos;&#x0D;&#x0A;- Destination element: &apos;CaptureImageProtoType/src/CaptureImages&apos;&#x0D;&#x0A;- Original element: &apos;CaptureImages.AllKingFeaturesTests.java&apos;" description="Copy compilation unit" destination="/src&lt;CaptureImages" element1="/src&lt;CaptureImages{AllKingFeaturesTests.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1429137974013" units="1" version="1.0"/>
+</session>

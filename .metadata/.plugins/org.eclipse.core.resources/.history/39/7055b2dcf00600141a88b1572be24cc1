@@ -1,0 +1,135 @@
+/**
+ * 
+ */
+package CaptureImages;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+/**
+ * This class is to emulate the driver that will create the create URL class
+ * This class sets the following in the URL class 1. Comic name (e.g. Brewster
+ * Rockit) 2. Comic code (e.g. brewsterrockit) 3. Comic Date that we are going
+ * after 4. Debug level (0 thru 9)
+ * 
+ * @author Rich
+ * 
+ */
+public class DriverImageCapture {
+
+    private int intDebugLevel = 0;
+    private String[] aryComicName = new String[4];
+    private LocalDate[] aryDates = new LocalDate[2];
+    private URLReader urlCreator;
+    private CaptureImage ciptImage;
+    private CaptureImagesWindow UiFrame;
+    private String strFolderToSaveImg = "C:/Users/wecksr/Documents/ComicStripImages/";
+    private DOMParserDemo objXmlParser;
+    private java.util.List<ComicStrip> ComicList = new ArrayList<>();
+    private DisplayDebugMessage dbgDisplay;
+
+
+    public DriverImageCapture(CaptureImagesWindow UIobject) {
+	// TODO Auto-generated constructor stub
+	this.UiFrame = UIobject;
+	initializeDriverImageCapture();
+    }
+
+    public DriverImageCapture(CaptureImagesWindow UIobject, int DebugLevel) {
+	this.UiFrame = UIobject;
+	this.intDebugLevel = DebugLevel;
+	initializeDriverImageCapture();
+    }
+
+    private void initializeDriverImageCapture() {
+	initializeVariables();
+	try {
+	    runUrlReader();
+	} catch (Exception e) {
+	    // TODO: handle exception
+	}
+	int intDebugCode = 1;
+	String strMsg = "Done";
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+
+    }
+
+    private void initializeVariables() {
+	dbgDisplay = new DisplayDebugMessage(intDebugLevel);
+//	ciptImage = new CaptureImage(intDebugLevel);
+	ciptImage = new CaptureImage(dbgDisplay);
+	objXmlParser = new DOMParserDemo();
+	objXmlParser.setupVariable();
+	ComicList = objXmlParser.getComicStripList();
+	UiFrame.setComicList(ComicList);
+	/*
+	aryComicName[0] = "brewsterrockit";
+	aryComicName[1] = "calvinandhobbes";
+	aryComicName[2] = "herman";
+	aryComicName[3] = "luann";
+	*/
+	UiFrame.setupComicArray();
+
+	// aryDates[3] = LocalDate.now();
+	// for (int ix = 2; ix >= 0; ix--) {
+	// aryDates[ix] = aryDates[3].minusDays(3 - ix);
+	// // aryDates[3 - ix] = aryDates[3] -1
+	// }
+
+	aryDates[1] = LocalDate.now();
+	aryDates[0] = LocalDate.now().minusDays(1);
+	try {
+	    urlCreator = new URLReader(intDebugLevel);
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
+    }
+
+    private void runUrlReader() {
+	int dmy = aryComicName.length;
+	int intNbrdays = aryDates.length;
+	// urlCreator.setEndingDate(aryDates[intNbrdays - 1]);
+	// urlCreator.setStartingDate(aryDates[0]);
+	for (int ix = 0; ix < aryComicName.length; ix++) {
+
+	    for (int iy = 0; iy < aryDates.length; iy++) {
+		urlCreator.setWorkingDate(aryDates[iy]);
+		urlCreator.setImageName(aryComicName[ix]);
+		try {
+		    urlCreator.createImageUrl();
+		    runCaptureImage();
+		    // TODO add a call to the Capture image program here and
+		    // take it out of the CreateWebPageUrl object
+		} catch (Exception e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+
+	}
+    }
+
+    private void runCaptureImage() {
+	// CaptureImageProtoType ciptImage = new
+	// CaptureImageProtoType(intDebugLevel);
+
+	// ciptImage.setImageExtension("jpg");
+	// ciptImage.setImageId(strImageId);
+	// ciptImage.setImageName(strImageName);
+	// ciptImage.setImageUrl(strImageUrl);
+	// ciptImage.setImageWidth(0);
+	// String strFolderToSaveImg =
+	// "C:/Users/wecksr/Documents/ComicStripImages/";
+	String strImageUrl = urlCreator.getImageUrl();
+	String strImageId = urlCreator.getImageId();
+	String strImageExtention = urlCreator.getImageExtension();
+
+	boolean blnImageCaptured = ciptImage.saveImageToFile(strImageUrl, strFolderToSaveImg, strImageId, strImageExtention);
+	if (blnImageCaptured) {
+	    blnImageCaptured = false;
+	}
+    }
+
+}

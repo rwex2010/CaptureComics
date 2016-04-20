@@ -1,0 +1,6 @@
+1405110840046	Rename type 'ImageWebPageURL'
+1405113240354	Delete element
+1405114192413	Rename field 'urlImageUrl'
+1405114814153	Rename field 'urlImageWebPageUrl'
+1405114854007	Rename field 'strImageWebPageUrl'
+1405115291609	Rename local variable 'strUrl'

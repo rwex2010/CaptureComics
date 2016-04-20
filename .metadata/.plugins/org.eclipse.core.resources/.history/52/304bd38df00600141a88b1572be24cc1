@@ -1,0 +1,594 @@
+package CaptureImages;
+
+import java.net.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+//import java.util.Calendar;
+//import java.util.Date;
+import java.util.Enumeration;
+import java.io.*;
+
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.HTML.Tag;
+import javax.swing.text.html.parser.ParserDelegator;
+
+public class URLReader {
+
+    // Variables returned from the various calls
+    private String strImageUrl;
+    private LocalDate ldImageDate;
+    private String strImageDate;
+    private String strImageId = "";
+    private String strImageExtension = "jpg";
+
+    private String strImageName = "brewsterrockit";
+    private int intDebugLevel = 0;
+
+    // private LocalDate ldStartingDate;
+    // private LocalDate ldEndingDate;
+    private LocalDate ldWorkingDate;
+
+    public URLReader() throws Exception {
+
+    }
+
+    public URLReader(int DebugLevel) throws Exception {
+	this.intDebugLevel = DebugLevel;
+    }
+
+    public URLReader(int DebugLevel, String imgName, LocalDate wrkingDate) throws Exception {
+	this.intDebugLevel = DebugLevel;
+	this.strImageName = imgName;
+	this.ldWorkingDate = wrkingDate;
+    }
+
+    // public void createWebPageUrl() throws Exception {
+    public void createImageUrl() throws Exception {
+
+	URL urlImageWebPage = setupImageWebPageUrl();
+
+	BufferedReader in = new BufferedReader(new InputStreamReader(urlImageWebPage.openStream()));
+
+	HTMLEditorKit.Parser parser = new ParserDelegator();
+	if (intDebugLevel >= 99) {
+	    System.out.println("***** Next is parse *****");
+	}
+	SwingHtmlParser shpTest = new SwingHtmlParser();
+	// shpTest.myReader = (StringReader) reader;
+	// Reader myLineReader = new LineNumberReader(reader);
+	Reader myLineReader = new LineNumberReader(in);
+
+//	shpTest.setMyReader(myLineReader);
+	shpTest.setDebugLevel(intDebugLevel);
+
+	// String inputLine;
+	// while ((inputLine = in.readLine()) != null)
+	// System.out.println(inputLine);
+	// in.close();
+
+	try {
+	    // parser.parse(reader, new SwingHtmlParser(), true);
+	    // parser.parse(reader, shpTest, true);
+	    // reader.close();
+	    parser.parse(myLineReader, shpTest, true);
+	    myLineReader.close();
+	    if (intDebugLevel >= 99) {
+		System.out.println();
+	    }
+	} catch (IOException e) {
+
+	    System.out.println("*** IOException Error ***");
+	    System.out.println(e.getMessage());
+	    e.printStackTrace();
+
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    System.out.println("*** oops ***");
+	    System.out.println(e.getMessage());
+	    e.printStackTrace();
+	}
+	in.close();
+
+	strImageDate = shpTest.getImageStringDate();
+	ldImageDate = shpTest.getImageLocalDate();
+	strImageUrl = shpTest.getImageUrl();
+	strImageId = strImageName + strImageDate;
+
+	if (intDebugLevel >= 99) {
+	    System.out.println("String Image Date: " + strImageDate);
+	    System.out.println("Image Date: " + ldImageDate.toString());
+	}
+	if (intDebugLevel >= 99) {
+	    System.out.println("ImageUrl: " + strImageUrl);
+	}
+
+	// TODO remove the following and just return the image URL to the
+	// calling program
+	// CaptureImageProtoType ciptImage = new
+	// CaptureImageProtoType ciptImage = new
+	// CaptureImageProtoType(intDebugLevel);
+	//
+	// // ciptImage.setImageExtension("jpg");
+	// // ciptImage.setImageId(strImageId);
+	// // ciptImage.setImageName(strImageName);
+	// // ciptImage.setImageUrl(strImageUrl);
+	// // ciptImage.setImageWidth(0);
+	// String strFolderToSaveImg =
+	// "C:/Users/wecksr/Documents/ComicStripImages/";
+	//
+	// boolean blnImageCaptured = ciptImage.saveImageToFile(strImageUrl,
+	// strFolderToSaveImg, strImageId, "jpg");
+
+    }
+
+    private URL setupImageWebPageUrl() throws MalformedURLException {
+	// TODO Determine URL of the Comic webPage
+	// for dates other than today
+	// http://www.gocomics.com/brewsterrockit/2014/05/26
+	URL returnValue;
+	LocalDate locToday = LocalDate.now();
+	String strUrl;
+	strUrl = "http://www.gocomics.com/" + strImageName;
+	if (locToday.equals(this.ldWorkingDate)) {
+	    strUrl = strUrl;
+	} else {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    strUrl += "/" + ldWorkingDate.format(formatter);
+	}
+
+	returnValue = new URL(strUrl);
+
+	return returnValue;
+    }
+
+    // public void setStartingDate(LocalDate ldFirstDate) {
+    // ldStartingDate = ldFirstDate;
+    // }
+    //
+    // public void setEndingDate(LocalDate ldLastDate) {
+    // ldEndingDate = ldLastDate;
+    // }
+
+    public String getImageUrl() {
+	return this.strImageUrl;
+    }
+
+    public String getImageExtension() {
+	return this.strImageExtension;
+    }
+
+    public String getImageId() {
+	return this.strImageId;
+    }
+
+    public void setWorkingDate(LocalDate ldWorkingDate) {
+	this.ldWorkingDate = ldWorkingDate;
+    }
+
+    public void setImageName(String strImageName) {
+	this.strImageName = strImageName;
+    }
+
+    public void setDebugLevel(int debugLevel) {
+	this.intDebugLevel = debugLevel;
+    }
+
+    public LocalDate getImageDate() {
+	return this.ldImageDate;
+    }
+
+    private String createStringFromReader(BufferedReader brInput) {
+	int intLineNumber = 0;
+	String htmlDocumentString = "";
+	String inputLine;
+	try {
+	    while ((inputLine = brInput.readLine()) != null) {
+		++intLineNumber;
+		htmlDocumentString += inputLine + "\n";
+		if (intDebugLevel >= 99) {
+		    System.out.println(intLineNumber + ") " + inputLine);
+		}
+	    }
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	if (intDebugLevel >= 99) {
+	    System.out.println("***********************************************************************************");
+	}
+	return htmlDocumentString;
+    }
+
+}
+
+/**
+ * *****************************************************************************
+ * 
+ * This class is to emulate the driver that will create the create URL class
+ * This class sets the following in the URL class 1. Comic name (e.g. Brewster
+ * Rockit) 2. Comic code (e.g. brewsterrockit) 3. Comic Date that we are going
+ * after 4. Debug level (0 thru 9)
+ * 
+ * @author wecksr
+ * 
+ ******************************************************************************** 
+ */
+
+//class ImageCaptureDriver {
+//
+//    private int intDebugLevel = 0;
+//    private String[] aryComicName = new String[4];
+//    private LocalDate[] aryDates = new LocalDate[4];
+//    private URLReader urlCreator;
+//    private CaptureImageProtoType ciptImage;
+////    private String strFolderToSaveImg = "C:/Users/wecksr/Documents/ComicStripImages/";
+//    private String strFolderToSaveImg = "C:/Users/Rich/Documents/ComicStripImages/";
+//
+//    public ImageCaptureDriver() {
+//	// TODO Auto-generated constructor stub
+//	initializeImageCaptureDriver();
+//    }
+//
+//    public ImageCaptureDriver(int DebugLevel) {
+//	this.intDebugLevel = DebugLevel;
+//	initializeImageCaptureDriver();
+//    }
+//
+//    private void initializeImageCaptureDriver() {
+//	initializeVariables();
+//	try {
+//	    runUrlReader();
+//	} catch (Exception e) {
+//	    // TODO: handle exception
+//	}
+//	if (intDebugLevel >= 1) {
+//	    System.out.println("Done");
+//	}
+//
+//    }
+//
+//    private void initializeVariables() {
+//	ciptImage = new CaptureImageProtoType(intDebugLevel);
+//	aryComicName[0] = "brewsterrockit";
+//	aryComicName[1] = "calvinandhobbes";
+//	aryComicName[2] = "herman";
+//	aryComicName[3] = "luann";
+//
+//	aryDates[3] = LocalDate.now();
+//	for (int ix = 2; ix >= 0; ix--) {
+//	    aryDates[ix] = aryDates[3].minusDays(3 - ix);
+//	    // aryDates[3 - ix] = aryDates[3] -1
+//	}
+//
+//	try {
+//	    urlCreator = new URLReader(intDebugLevel);
+//	} catch (Exception e) {
+//	    // TODO Auto-generated catch block
+//	    e.printStackTrace();
+//	}
+//
+//    }
+//
+//    private void runUrlReader() {
+//	int dmy = aryComicName.length;
+//	int intNbrdays = aryDates.length;
+//	// urlCreator.setEndingDate(aryDates[intNbrdays - 1]);
+//	// urlCreator.setStartingDate(aryDates[0]);
+//	for (int ix = 0; ix < aryComicName.length; ix++) {
+//
+//	    for (int iy = 0; iy < aryDates.length; iy++) {
+//		urlCreator.setWorkingDate(aryDates[iy]);
+//		urlCreator.setImageName(aryComicName[ix]);
+//		try {
+//		    urlCreator.createImageUrl();
+//		    runCaptureImage();
+//		    // TODO add a call to the Capture image program here and
+//		    // take it out of the CreateWebPageUrl object
+//		} catch (Exception e) {
+//		    // TODO Auto-generated catch block
+//		    e.printStackTrace();
+//		}
+//	    }
+//
+//	}
+//    }
+//
+//    private void runCaptureImage() {
+//	// CaptureImageProtoType ciptImage = new
+//	// CaptureImageProtoType(intDebugLevel);
+//
+//	// ciptImage.setImageExtension("jpg");
+//	// ciptImage.setImageId(strImageId);
+//	// ciptImage.setImageName(strImageName);
+//	// ciptImage.setImageUrl(strImageUrl);
+//	// ciptImage.setImageWidth(0);
+//	// String strFolderToSaveImg =
+//	// "C:/Users/wecksr/Documents/ComicStripImages/";
+//	String strImageUrl = urlCreator.getImageUrl();
+//	String strImageId = urlCreator.getImageId();
+//	String strImageExtention = urlCreator.getImageExtension();
+//
+//	boolean blnImageCaptured = ciptImage.saveImageToFile(strImageUrl, strFolderToSaveImg, strImageId, strImageExtention);
+//	if(blnImageCaptured){
+//	    blnImageCaptured = false;
+//	}
+//    }
+//
+//}
+
+///**
+// * *****************************************************************************
+// * 
+// * This class is the callback that feeds the parser
+// * 
+// * @author wecksr
+// * 
+// *         *********************************************************************
+// *         ********
+// */
+//class SwingHtmlParser extends HTMLEditorKit.ParserCallback {
+//
+//    private LineNumberReader myReader;
+//    private boolean blnShowAll = false;
+//    private int intDebugLevel = 0; // 0=no ui 1=output just bare minimum
+//				   // 9=output everything
+//				   // private boolean blnPrintLine = false;
+//    private boolean blnFoundFirstP = false;
+//    private boolean blnFoundSrc = false;
+//    private boolean blnFoundH1 = false;
+//    private boolean blnFoundDate = false;
+//    private String strImageUrl = "";
+//    private String strImageDate = "";
+//    private LocalDate ldImageDate;
+//
+//    /*
+//     * 
+//     */
+//    private boolean blnFoundRightDivTag = false;
+//    private String strComicDateNoDelimeter = "";
+//    private String strTagToFind = "div";
+//
+//    public void handleSimpleTag(Tag tag, MutableAttributeSet attrSet, int pos) {
+//	handleAllStartTags(tag, attrSet, pos);
+//    }
+//
+//    private void printTagWithAttributes(Tag tag, MutableAttributeSet attrSet) {
+//	if (intDebugLevel >= 5) {
+//	    System.out.println("*** method printTagWithAttributes ***" + tag.toString());
+//
+//	}
+//	// printTagWithAttributes(tag, attrSet);
+//    }
+//
+//    public void handleStartTag(Tag tag, MutableAttributeSet attrSet, int pos) {
+//	handleAllStartTags(tag, attrSet, pos);
+//    }
+//
+//    public void handleText(char[] data, int pos) {
+//	if (intDebugLevel >= 5) {
+//	    System.out.println("Tag Text => " + new String(data));
+//	}
+//    }
+//
+//    public void handleComment(char[] data, int pos) {
+//	if (intDebugLevel >= 5) {
+//	    System.out.println("Comment Text => " + new String(data));
+//	}
+//    }
+//
+//    public void handleEndOfLineString(String data) {
+//	// This is invoked after the stream has been parsed, but before
+//	// flush.
+//	// eol will be one of \n, \r or \r\n, which ever is
+//	// encountered the most in parsing the stream.
+//	if (intDebugLevel >= 5) {
+//	    System.out.println("End of Line String => " + data);
+//	}
+//    }
+//
+//    public void handleEndTag(Tag tag, int pos) {
+//
+//	if (intDebugLevel >= 5) {
+//	    System.out.println(pos + "    Closing: " + tag.toString());
+//	}
+//    }
+//
+//    public void handleError(String err, int pos) {
+//	if (intDebugLevel >= 5) {
+//	    System.out.println("Error => " + err);
+//	}
+//    }
+//
+//    /**
+//     * method to handle all Start tags and locates the ones needed. The switch
+//     * statement must execute each case statement in the following order 1 -
+//     * 'div' - this looks for the div tag with an id of 'content' and skips over
+//     * all up to that point 2 - 'h1' - this tag does not contain any information
+//     * but a child of this tag is the 'a' tag 3 - 'a' - This tag contains an
+//     * href attribute with a value that contains the date of the image 4 - 'p' -
+//     * This tag also does not contain any information, but the next 'img' tag
+//     * contains the url information 5 - 'img' - This tag contains an src
+//     * attribute with a value that contains the url of the image with the 'code'
+//     * for this image ***
+//     * 
+//     * @param tag
+//     *            is the HTML.Tag that this routine is parsing
+//     * @param attrSet
+//     *            is a set of the attributes that a are part of this tag
+//     * @param pos
+//     *            is the position in the reader that this tag is located.
+//     */
+//    private void handleAllStartTags(Tag tag, MutableAttributeSet attrSet, int pos) {
+//	if (intDebugLevel >= 5) {
+//	    displayThisTag(tag, attrSet, pos);
+//	}
+//	switch (strTagToFind) {
+//	case "div":
+//	    if (tag == HTML.Tag.DIV) {
+//		blnFoundRightDivTag = FindRightDivTag(tag, attrSet, pos);
+//		if (blnFoundRightDivTag) {
+//		    if (intDebugLevel >= 5) {
+//			System.out.println("**Div**");
+//			displayThisTag(tag, attrSet, pos);
+//		    }
+//		    strTagToFind = "h1";
+//		}
+//	    }
+//	    break;
+//
+//	case "h1":
+//	    if (tag == HTML.Tag.H1) {
+//		if (intDebugLevel >= 5) {
+//		    System.out.println("**** H1 ***************");
+//		    displayThisTag(tag, attrSet, pos);
+//		}
+//		blnFoundH1 = true;
+//		strTagToFind = "a";
+//	    }
+//	    break;
+//
+//	case "a":
+//	    if (tag == HTML.Tag.A) {
+//		if (intDebugLevel >= 5) {
+//		    System.out.println("**** a ***************");
+//		    displayThisTag(tag, attrSet, pos);
+//		}
+//		String strHrefAtt = findProperAttributes(tag, attrSet, pos, HTML.Attribute.HREF);
+//		blnFoundDate = CreateDateString(strHrefAtt);
+//		strTagToFind = "p";
+//	    }
+//	    break;
+//
+//	case "p":
+//	    if (tag == HTML.Tag.P) {
+//		if (intDebugLevel >= 5) {
+//		    System.out.println("******* P *******");
+//		    displayThisTag(tag, attrSet, pos);
+//		}
+//		strTagToFind = "img";
+//	    }
+//	    break;
+//
+//	case "img": // look for 'src' attribute
+//	    if (tag == HTML.Tag.IMG) {
+//		if (intDebugLevel >= 5) {
+//		    System.out.println("**** img ***************");
+//		    displayThisTag(tag, attrSet, pos);
+//		}
+//		String strSrcAtt = findProperAttributes(tag, attrSet, pos, HTML.Attribute.SRC);
+//		if (intDebugLevel >= 5) {
+//		    System.out.println("Tag: img -- Att: src: " + strSrcAtt);
+//		}
+//		strImageUrl = strSrcAtt;
+//		strTagToFind = "done";
+//	    }
+//	    break;
+//
+//	default:
+//	    break;
+//	}
+//    }
+//
+//    private void displayThisTag(Tag tag, MutableAttributeSet attrSet, int pos) {
+//	if (intDebugLevel >= 5) {
+//	    System.out.println(pos + "~Tag =>~" + tag.toString() + "~Attribute cnt: " + attrSet.getAttributeCount());
+//	}
+//
+//    }
+//
+//    /**
+//     * 
+//     * @param tag
+//     * @param attrSet
+//     * @param pos
+//     * @param htmlAtt
+//     * @return
+//     */
+//    private String findProperAttributes(Tag tag, MutableAttributeSet attrSet, int pos, HTML.Attribute htmlAtt) {
+//	String strReturnValue = null;
+//	int intAttCnt = attrSet.getAttributeCount();
+//
+//	if (intAttCnt > 0) {
+//	    Enumeration<?> attributeNames = attrSet.getAttributeNames();
+//	    while (attributeNames.hasMoreElements()) {
+//		Object objAttrName = attributeNames.nextElement();
+//		String attrName = objAttrName.toString();
+//		if (intDebugLevel >= 7) {
+//		    System.out.println("        Tag With Attributes => " + attrName + " : " + attrSet.getAttribute(objAttrName));
+//		}
+//
+//		String strAttValue = (String) attrSet.getAttribute(htmlAtt);
+//		if (strAttValue != null && strReturnValue == null) {
+//		    strReturnValue = strAttValue;
+//		}
+//	    }
+//
+//	}
+//
+//	return strReturnValue;
+//    }
+//
+//    private boolean FindRightDivTag(Tag tag, MutableAttributeSet attrSet, int pos) {
+//	boolean blnReturnValue = false;
+//
+//	String strDivId = (String) attrSet.getAttribute(HTML.Attribute.ID);
+//	String strToCompare = "content";
+//	if (strToCompare.equals(strDivId)) {
+//	    blnReturnValue = true;
+//	}
+//	return blnReturnValue;
+//    }
+//
+//    private boolean CreateDateString(String strHref) {
+//	boolean blnReturnValue = false;
+//
+//	String[] aryHrefDate = strHref.split("/");
+//	if (intDebugLevel >= 5) {
+//	    // strComicDateNoDelimeter = "";
+//	    String strTemp = "";
+//	    for (int ix = 0; ix < aryHrefDate.length; ix++) {
+//		strTemp += aryHrefDate[ix] + " - ";
+//		System.out.println("ix = " + ix + ") value: " + aryHrefDate[ix]);
+//	    }
+//	    System.out.println("array length: " + aryHrefDate.length + ") " + strTemp);
+//
+//	}
+//	strImageDate = aryHrefDate[2] + aryHrefDate[3] + aryHrefDate[4];
+//
+//	Integer intYear = new Integer(aryHrefDate[2]);
+//	Integer intMonth = new Integer(aryHrefDate[3]);
+//	Integer intDay = new Integer(aryHrefDate[4]);
+//	ldImageDate = LocalDate.of(intYear, intMonth, intDay);
+//
+//	if (intDebugLevel >= 5) {
+//	    System.out.println("noDelimeterDate: " + strComicDateNoDelimeter);
+//	}
+//	blnReturnValue = true;
+//
+//	return blnReturnValue;
+//    }
+//
+//    public void setDebugLevel(int intLevel) {
+//	intDebugLevel = intLevel;
+//    }
+//
+//    public void setMyReader(Reader myReader) {
+//	this.myReader = (LineNumberReader) myReader;
+//
+//    }
+//
+//    public String getImageStringDate() {
+//	return strImageDate;
+//    }
+//
+//    public LocalDate getImageLocalDate() {
+//	return ldImageDate;
+//    }
+//
+//    public String getImageUrl() {
+//	return strImageUrl;
+//    }
+//
+//}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=CaptureImageProtoType/C:\/Program Files\/Java\/jdk1.8.0\/jre\/lib\/rt.jar&lt;javax.swing.text.html(HTML.class[HTML" modifiers="1" timestamp="1401207264885"/>
+<typeInfo handle="=CaptureImageProtoType/C:\/Program Files\/Java\/jdk1.8.0\/jre\/lib\/rt.jar&lt;javax.swing.text.html(HTMLEditorKit.class[HTMLEditorKit" modifiers="1" timestamp="1401207264885"/>
+<typeInfo handle="=CaptureImageProtoType/C:\/Program Files\/Java\/jdk1.8.0\/jre\/lib\/rt.jar&lt;javax.swing.text.html(HTMLEditorKit$ParserCallback.class[ParserCallback" modifiers="9" timestamp="1401207264885"/>
+<typeInfo handle="=CaptureImageProtoType/src&lt;CaptureImages{CreateImageUrl.java[CreateImageUrl" modifiers="1025" timestamp="1430484634000"/>
+<typeInfo handle="=CaptureImageProtoType/src&lt;CaptureImages{ComicStripImages.java[ComicStripImages" modifiers="1025" timestamp="1430484634000"/>
+<typeInfo handle="=CaptureImageProtoType/src&lt;CaptureImages{HtmlWebPageReader.java[HtmlWebPageReader" modifiers="1025" timestamp="1430484646000"/>
+<typeInfo handle="=CaptureImageProtoType/src&lt;CaptureImages{HtmlParserCallback.java[HtmlParserCallback" modifiers="1025" timestamp="1430484646000"/>
+<typeInfo handle="=CaptureImageProtoType/src&lt;CaptureImages{StepThruWebPageTagsToGetImageUrl.java[StepThruWebPageTagsToGetImageUrl" modifiers="1025" timestamp="1430484652000"/>
+</typeInfoHistroy>

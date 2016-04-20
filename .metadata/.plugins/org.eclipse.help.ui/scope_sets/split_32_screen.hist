@@ -1,0 +1,5 @@
+#Fri Oct 30 07:11:53 PDT 2015
+__DEFAULT__=false
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.help.ui.localSearch.master=true
+expression=split screen

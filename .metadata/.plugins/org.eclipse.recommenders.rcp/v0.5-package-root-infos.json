@@ -1,0 +1,288 @@
+[
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "68fe4aa41366486f8816731ca3fbf2686524baa5",
+    "jarFileModificationDate": "2014-06-01T13:29:49.877-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\cldrdata.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "266775a7e051af1f65d5dfd5c1329768ebb47dbf",
+    "jarFileModificationDate": "2014-06-01T13:30:00.209-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\jfxrt.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "9a1284417f00f1a4c77e67d71a6fbea2eeaf5d7c",
+    "jarFileModificationDate": "2014-06-01T13:29:49.970-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\jce.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "a1145f42443b93efb460c444d7e69f02a7e4a9df",
+    "jarFileModificationDate": "2014-06-01T13:29:49.972-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\jfr.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "f9173a6daa27eba81a68728441f80ad8b49b03bd",
+    "jarFileModificationDate": "2014-06-01T13:29:49.879-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\dnsns.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "d9d21229382244f1aeea984400c99acc572aca52",
+    "jarFileModificationDate": "2014-06-01T13:29:59.754-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\jsse.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "e15f5140cfdafc6750e44a3c6786879d28ccbcdb",
+    "jarFileModificationDate": "2014-06-01T13:29:49.902-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\sunmscapi.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "44bef98b0d12978379d3e7cf24ec3429e07b8408",
+    "jarFileModificationDate": "2014-06-01T13:29:59.847-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\localedata.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "bbce4cd0f0bff253824d672917a3c2597789bdc0",
+    "jarFileModificationDate": "2014-06-01T13:29:49.904-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\zipfs.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "06331dfe97beb57d41ec97110766974376a5d9f7",
+    "jarFileModificationDate": "2014-06-01T13:29:59.351-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\rt.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "org.hamcrest.core",
+    "version": {
+      "major": 1,
+      "minor": 3,
+      "micro": 0,
+      "qualifier": "v201303031735"
+    },
+    "jarFileFingerprint": "5ed9fe32ab1d2b18bec7cac0a044090100f327ba",
+    "jarFileModificationDate": "2013-06-13T23:19:04-07:00",
+    "location": "C:\\tools\\eclipse\\plugins\\org.hamcrest.core_1.3.0.v201303031735.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "5ebef6942e3460e66b64288b8a401e621a73a1fc",
+    "jarFileModificationDate": "2014-06-01T13:29:49.868-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\access-bridge-64.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "junit",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "4e031bb61df09069aeb2bffb4019e7a5034a4ee0",
+    "jarFileModificationDate": "2013-05-17T12:05:12-07:00",
+    "location": "C:\\tools\\eclipse\\plugins\\org.junit_4.11.0.v201303080030\\junit.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "swt-grouplayout",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "f996963cec02528b02efc1ca05805cdeb776828e",
+    "jarFileModificationDate": "2014-08-17T16:21:34-07:00",
+    "location": "C:\\Users\\Rich\\Java\\CaptureComics\\CaptureImageProtoType\\swt-grouplayout.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "177dd4ecdb3708da7adac9eda0ae94ea420d9476",
+    "jarFileModificationDate": "2014-06-01T13:29:59.428-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\charsets.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "swt-grouplayout",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "f996963cec02528b02efc1ca05805cdeb776828e",
+    "jarFileModificationDate": "2015-04-30T12:06:14-07:00",
+    "location": "C:\\Users\\Rich\\EclipseProjects\\CaptureComics\\CaptureImageProtoType\\swt-grouplayout.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "4f4081b69df48f293cf72c65d2cbe0108fbd1539",
+    "jarFileModificationDate": "2014-06-01T13:29:49.903-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\sunpkcs11.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "5e2c12ffab605a78f773e42b2497a9569316346f",
+    "jarFileModificationDate": "2014-06-01T13:29:49.902-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\sunjce_provider.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "0adf05f10d20aa2ef14988b33150454a7b6232e9",
+    "jarFileModificationDate": "2014-06-01T13:29:49.900-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\nashorn.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "87735bf437a37d0efd481fa449c9daf9250a1540",
+    "jarFileModificationDate": "2014-06-01T13:29:49.879-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\jaccess.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "6244b3ce6ff7c476eb858120dac955f88430992c",
+    "jarFileModificationDate": "2014-06-01T13:29:50.156-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\resources.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "3bc82c5707e80b282524f41eb633f7abf03b23b6",
+    "jarFileModificationDate": "2014-06-01T13:29:49.900-07:00",
+    "location": "C:\\Program Files\\Java\\jdk1.8.0\\jre\\lib\\ext\\sunec.jar",
+    "javaRuntime": true
+  }
+]

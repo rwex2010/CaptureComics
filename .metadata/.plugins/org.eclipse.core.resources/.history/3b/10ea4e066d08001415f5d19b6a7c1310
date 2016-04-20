@@ -1,0 +1,52 @@
+/**
+ * 
+ */
+package CaptureImages;
+
+/**
+ * @author wecksr
+ *
+ */
+public class DisplayDebugMessage {
+    private int intDebugLevel = 0;
+
+    public DisplayDebugMessage(int intDebugLevel) {
+	this.intDebugLevel = intDebugLevel;
+	TestBitWiseComparison();
+
+    }
+
+    public void ShowMessage(String strMessage, int intDebugCode) {
+	System.out.println("DebugLevel:" + intDebugLevel + " DebugCode:" + intDebugCode);
+	if ((intDebugLevel & intDebugCode) > 0) {
+	    System.out.println(strMessage);
+	}
+    }
+
+    public void ShowMessageArray(String[] strMessage, int intDebugCode) {
+	System.out.println("DebugLevel:" + intDebugLevel + " DebugCode:" + intDebugCode);
+	if ((intDebugLevel & intDebugCode) > 0) {
+	    for (int ix = 0; ix < strMessage.length; ix++) {
+		System.out.println(strMessage[ix]);
+	    }
+	}
+    }
+
+    public void TestBitWiseComparison() {
+	// int ixLevel = intDebugLevel;
+	for (int ixLevel = 0; ixLevel <= intDebugLevel; ixLevel++) {
+	    int[] intNbrs = { 1, 2, 4, 8, 16, 32, 64 };
+	    for (int ixCode : intNbrs) {
+		String strMsg = "DebugLevel: " + ixLevel + " DebugCode: " + ixCode + " = ";
+		if ((ixLevel & ixCode) > 0) {
+		    strMsg += "true";
+		} else {
+		    strMsg += "false";
+		}
+		System.out.println(strMsg);
+	    }
+
+	}
+    }
+
+}

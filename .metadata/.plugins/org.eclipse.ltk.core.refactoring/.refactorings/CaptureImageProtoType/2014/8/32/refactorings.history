@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;CaptureImages.CaptureImagesWindow.DateRangeButtonChanged(...)&apos; to &apos;actionOnDateRangeButton&apos;&#x0D;&#x0A;- Original project: &apos;CaptureImageProtoType&apos;&#x0D;&#x0A;- Original element: &apos;CaptureImages.CaptureImagesWindow.DateRangeButtonChanged(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;CaptureImages.CaptureImagesWindow.actionOnDateRangeButton(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;DateRangeButtonChanged&apos;" flags="589826" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;CaptureImages{CaptureImagesWindow.java[CaptureImagesWindow~DateRangeButtonChanged~QAbstractButton;" name="actionOnDateRangeButton" references="true" stamp="1407117203302" version="1.0"/>
+</session>

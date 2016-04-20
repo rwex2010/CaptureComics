@@ -1,0 +1,39 @@
+/**
+ * 
+ */
+package CaptureImages;
+
+/**
+ * @author wecksr
+ *
+ */
+public class DisplayDebugMessage {
+    private int intDebugLevel = 0;
+
+    public DisplayDebugMessage(int intDebugLevel) {
+	this.intDebugLevel = intDebugLevel;
+    }
+
+    public void ShowMessage(String strMessage, int intDebugCode) {
+
+	if ((intDebugLevel & intDebugCode) > 0) {
+	    System.out.println(strMessage);
+	}
+    }
+
+    public void TestBitWiseComparison() {
+	for (int ixLevel = 0; ixLevel < 16; ixLevel++) {
+	    for (int ixCode = 0; ixCode < 16; ixCode++) {
+		String strMsg = "DebugLevel: " + ixLevel + " DebugCode: " + ixCode + " = ";
+		if ((ixLevel & ixCode) > 0) {
+		    strMsg += "true";
+		} else {
+		    strMsg += "false";
+		}
+		System.out.println(strMsg);
+	    }
+
+	}
+    }
+
+}

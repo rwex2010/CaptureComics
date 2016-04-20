@@ -1,0 +1,6 @@
+1412024146419	Extract method 'findImageUrl'
+1412084635310	Rename method 'findImageUrl'
+1412085172413	Extract method 'findImageUrl'
+1412116032870	Rename method 'checkDebugMessages'
+1412116652843	Rename method 'runCaptureImage'
+1412116953708	Rename method 'isThisDayValidForThisComic'

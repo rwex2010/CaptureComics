@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;empList&apos; in &apos;CaptureImages.DOMParserDemo.main(...)&apos; to &apos;comicList&apos;&#x0D;&#x0A;- Original project: &apos;CaptureImageProtoType&apos;&#x0D;&#x0A;- Original element: &apos;CaptureImages.DOMParserDemo.main(String[]).empList&apos;&#x0D;&#x0A;- Renamed element: &apos;empList&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;empList&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;CaptureImages{DOMParserDemo.java[DOMParserDemo~main~\[QString;@empList!1695!1739!1712!1718!QList\&lt;QComicStrip;&gt;;!0!false" name="comicList" references="true" stamp="1403014307692" version="1.0"/>
+</session>

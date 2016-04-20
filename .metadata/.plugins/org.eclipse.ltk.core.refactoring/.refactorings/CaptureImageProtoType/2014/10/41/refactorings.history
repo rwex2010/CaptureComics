@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;myTestObject&apos; in &apos;CaptureImages.ArcamaxImageWebPageUrlTest&apos; to &apos;target&apos;&#x0D;&#x0A;- Original project: &apos;CaptureImageProtoType&apos;&#x0D;&#x0A;- Original element: &apos;CaptureImages.ArcamaxImageWebPageUrlTest.myTestObject&apos;&#x0D;&#x0A;- Renamed element: &apos;CaptureImages.ArcamaxImageWebPageUrlTest.target&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;myTestObject&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;CaptureImages{ArcamaxImageWebPageUrlTest.java[ArcamaxImageWebPageUrlTest^myTestObject" name="target" references="true" setter="false" stamp="1412775482253" textual="false" version="1.0"/>
+</session>

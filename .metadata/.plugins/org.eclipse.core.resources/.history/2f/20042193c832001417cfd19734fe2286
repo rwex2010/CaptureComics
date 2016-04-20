@@ -1,0 +1,403 @@
+/**
+ * 
+ */
+package CaptureImages;
+
+import java.awt.EventQueue;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
+/**
+ * This class is to emulate the driver that will create the create URL class
+ * This class sets the following in the URL class 1. Comic name (e.g. Brewster
+ * Rockit) 2. Comic code (e.g. brewsterrockit) 3. Comic Date that we are going
+ * after 4. Debug level (0 thru 9)
+ * 
+ * @author Rich
+ * 
+ */
+public class DriverImageCapture {
+
+    private int intDebugLevel = 0;
+    private String[] aryComicName = new String[4];
+    private String[] aryDomainsToUse;
+    private LocalDate[] aryDates = new LocalDate[2];
+    private LocalDate ldWorkingDate;
+    private HtmlWebPageReader urlCreator;
+    private CaptureImage captureImage;
+    private UIFormCaptureImages UiFrame;
+    private ImageWebPageURL goComicsWebPageURL;
+    private ImageWebPageURL dilbertWebPageURL;
+    private ImageWebPageURL safeHavensWebPageURL;
+    private ImageWebPageURL onTheFastrackWebPageURL;
+    private String strFolderToSaveImg = "C:/Users/wecksr/Documents/ComicStripImages/";
+    private ParseComicXml objXmlParser;
+    private java.util.List<ComicStrip> ComicList = new ArrayList<>();
+    private DisplayDebugMessage dbgDisplay;
+    private DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+    private String strPathToXml;
+
+    /**
+     * Launch the application.
+     */
+    // public static void main(String[] args) {
+    // EventQueue.invokeLater(new Runnable() {
+    // public void run() {
+    // try {
+    // DriverImageCapture driverICap = new DriverImageCapture();
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
+    // });
+    // }
+
+    public DriverImageCapture() {
+	initializeDriverImageCapture();
+    }
+
+    public DriverImageCapture(UIFormCaptureImages UIobject) {
+	// TODO Auto-generated constructor stub
+	this.UiFrame = UIobject;
+	initializeDriverImageCapture();
+    }
+
+    public DriverImageCapture(UIFormCaptureImages UIobject, int DebugLevel) {
+	this.UiFrame = UIobject;
+	this.intDebugLevel = DebugLevel;
+	initializeDriverImageCapture();
+    }
+
+    public void setDebugLevel(int intDebugLevel) {
+	this.intDebugLevel = intDebugLevel;
+    }
+
+    private void initializeDriverImageCapture() {
+	initializeVariables();
+
+    }
+
+    private void initializeVariables() {
+	dbgDisplay = new DisplayDebugMessage(intDebugLevel);
+	this.UiFrame = new UIFormCaptureImages(this, dbgDisplay);
+	this.UiFrame.setDriverObject(this);
+	this.UiFrame.setDebugDisplay(dbgDisplay);
+	// ciptImage = new CaptureImage(intDebugLevel);
+	captureImage = new CaptureImage(dbgDisplay);
+	objXmlParser = new ParseComicXml();
+	this.UiFrame.frame.setVisible(true);
+
+    }
+
+    public void CaptureSelectedImages(int intTotalImageCount, int intStartingIndex, Boolean blnOnlyThisImage) {
+	int intDebugCode = 2;
+	String strMsg = "Driver -> CaptureSelectedImages (multiple paramaters) - starting";
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+	intDebugCode = 4;
+	strMsg = "Total image count: " + intTotalImageCount + " Starting index: " + intStartingIndex;
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+	runCreateUrl(intTotalImageCount, intStartingIndex, blnOnlyThisImage);
+	UiFrame.setMessageBoard(dbgDisplay.getAllMessageLines());
+
+    }
+
+    public void setPathToXML(String PathToXml) {
+	this.strPathToXml = PathToXml;
+    }
+
+    public void setPathToSaveImage(String PathToSaveImage) {
+	this.strFolderToSaveImg = PathToSaveImage;
+    }
+
+    public void setArrayDates(LocalDate[] aryDates) {
+	this.aryDates = aryDates;
+    }
+
+    public void loadWindow() {
+	// this.intDebugLevel = UiFrame.getCurrentDebugLevel();
+	dbgDisplay.setDebugLevel(this.intDebugLevel);
+	int intDebugCode = 2;
+	String strMsg = "Driver -> loadWindow() - starting";
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+
+	intDebugCode = 4;
+	strMsg = "Driver -> loadWindow() Path to XMl: " + strPathToXml;
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+
+	this.aryDomainsToUse = UiFrame.getStrDomainArray();
+
+	objXmlParser.setDebugDisplay(dbgDisplay);
+	objXmlParser.setMyXmlFile(strPathToXml);
+	objXmlParser.setAryDomainToUse(this.aryDomainsToUse);
+	objXmlParser.setupVariable();
+	this.ComicList = null;
+	ComicList = objXmlParser.getComicStripList();
+	java.util.Collections.sort(ComicList, new Comparator<ComicStrip>() {
+
+	    @Override
+	    public int compare(ComicStrip o1, ComicStrip o2) {
+		// TODO Auto-generated method stub
+		return o1.ComicName.compareToIgnoreCase(o2.ComicName);
+	    }
+
+	    @Override
+	    public Comparator<ComicStrip> reversed() {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	    @Override
+	    public Comparator<ComicStrip> thenComparing(Comparator<? super ComicStrip> other) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	    @Override
+	    public <U> Comparator<ComicStrip> thenComparing(Function<? super ComicStrip, ? extends U> keyExtractor, Comparator<? super U> keyComparator) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	    @Override
+	    public <U extends Comparable<? super U>> Comparator<ComicStrip> thenComparing(Function<? super ComicStrip, ? extends U> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	    @Override
+	    public Comparator<ComicStrip> thenComparingInt(ToIntFunction<? super ComicStrip> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	    @Override
+	    public Comparator<ComicStrip> thenComparingLong(ToLongFunction<? super ComicStrip> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	    @Override
+	    public Comparator<ComicStrip> thenComparingDouble(ToDoubleFunction<? super ComicStrip> keyExtractor) {
+		// TODO Auto-generated method stub
+		return null;
+	    }
+
+	});
+
+	aryDates = UiFrame.getArrayDates();
+
+	// try {
+	// // dilbertWebPageURL = new DilbertWebPageURL(dbgDisplay);
+	// // goComicsWebPageURL = new GoComicsImageWebPageUrl(dbgDisplay);
+	// // safeHavensWebPageURL = new SafeHavensWebPageURL(dbgDisplay);
+	// // onTheFastrackWebPageURL = new OnTheFastrackWebPageURL(dbgDisplay);
+	// // urlCreator = new HtmlWebPageReader(this.dbgDisplay);
+	// } catch (Exception e) {
+	// intDebugCode = 1;
+	// if (dbgDisplay.thisDoesPrint(intDebugCode)) {
+	// System.out.println("Driver >> loadWindow()\n" + e.getMessage());
+	// e.printStackTrace();
+	// }
+	// }
+
+    }
+
+    public java.util.List<ComicStrip> getComicList() {
+	return this.ComicList;
+    }
+
+    private void runCreateUrl(int intTotalImageCount, int intStartingIndex, Boolean blnOnlyThisImage) {
+	int intDebugCode = 2;
+	String strMsg = "Driver -> runCreateUrl - starting";
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+
+	this.aryDates = UiFrame.getArrayDates();
+	for (int ix = intStartingIndex; ix < intTotalImageCount; ix++) {
+	    int indx = UiFrame.getCurrentIndex();
+	    ComicStrip csData = UiFrame.getNextComicFmChooser();
+
+	    intDebugCode = 4;
+	    strMsg = indx + " - " + csData.ComicCode;
+	    dbgDisplay.ShowMessage(strMsg, intDebugCode);
+
+	    stepThroughDates(csData, aryDates);
+	    if (blnOnlyThisImage) {
+		break;
+	    }
+	}
+
+    }
+
+    private void stepThroughDates(ComicStrip csData, LocalDate[] DateRange) {
+	int intDebugCode = 2;
+	String strMsg = "Driver -> stepThroughDates - starting";
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+	String strComicCode = csData.ComicCode;
+	Period perDateRange;
+	LocalDate dtStartDate = DateRange[0];
+	LocalDate dtEndDate = DateRange[1];
+	perDateRange = dtStartDate.until(dtEndDate);
+
+	ldWorkingDate = dtStartDate;
+
+	intDebugCode = 4;
+	strMsg = "Date range: " + perDateRange.toString();
+	strMsg += "\n Start Date: " + dtStartDate.format(this.dtFormatter);
+	strMsg += "\n End Date: " + dtEndDate.format(this.dtFormatter);
+	dbgDisplay.ShowMessage(strMsg, intDebugCode);
+	int limitLoop = 60;
+	Boolean blnOkayToContinue = true;
+	while (!(perDateRange.isNegative()) && limitLoop > 0) {
+	    int dayOfWeek = ldWorkingDate.getDayOfWeek().getValue(); // 1=Monday
+								     // 7=Sunday
+	    int daysAvailable = Integer.decode(csData.DaysAvailable);
+	    if (dayOfWeek & daysAvailable) {
+
+		intDebugCode = 2;
+		strMsg = "Driver->stepThroughDates while loop ";
+		strMsg += "\n Domain: " + csData.Domain;
+		strMsg += "\n limitLoop: " + limitLoop;
+		dbgDisplay.ShowMessage(strMsg, intDebugCode);
+		String strWebPageUrl = "";
+		URL urlWebpage = null;
+		switch (csData.Domain) {
+		case "images.ucomics.com":
+		case "imgsrv.gocomics.com":
+		    if (goComicsWebPageURL == null) {
+			goComicsWebPageURL = new GoComicsImageWebPageUrl(dbgDisplay);
+		    }
+		    try {
+			urlCreator = new GoComicsHtmlWebPageReader(this.dbgDisplay);
+		    } catch (Exception e1) {
+			intDebugCode = 1;
+			if (dbgDisplay.thisDoesPrint(intDebugCode)) {
+			    System.out.println("Driver >> loadWindow()\n" + e1.getMessage());
+			    e1.printStackTrace();
+			}
+		    }
+		    goComicsWebPageURL.setupWebPageUrl(strComicCode, ldWorkingDate);
+		    urlWebpage = goComicsWebPageURL.getWebPageUrl();
+		    break;
+		case "Dilbert.com":
+		    if (dilbertWebPageURL == null) {
+			dilbertWebPageURL = new DilbertWebPageURL(dbgDisplay);
+		    }
+		    try {
+			urlCreator = new DilbertHtmlWebPageReader(this.dbgDisplay);
+		    } catch (Exception e1) {
+			intDebugCode = 1;
+			if (dbgDisplay.thisDoesPrint(intDebugCode)) {
+			    System.out.println("Driver >> loadWindow()\n" + e1.getMessage());
+			    e1.printStackTrace();
+			}
+		    }
+		    dilbertWebPageURL.setupWebPageUrl(strComicCode, ldWorkingDate);
+		    urlWebpage = dilbertWebPageURL.getWebPageUrl();
+		    break;
+
+		case "safehavenscomic.com":
+		    if (safeHavensWebPageURL == null) {
+			safeHavensWebPageURL = new SafeHavensWebPageURL(dbgDisplay);
+		    }
+		    try {
+			urlCreator = new BillHolbrookHtmlWebPageReader(this.dbgDisplay);
+		    } catch (Exception e1) {
+			intDebugCode = 1;
+			if (dbgDisplay.thisDoesPrint(intDebugCode)) {
+			    System.out.println("Driver >> loadWindow()\n" + e1.getMessage());
+			    e1.printStackTrace();
+			}
+		    }
+		    safeHavensWebPageURL.setupWebPageUrl(strComicCode, ldWorkingDate);
+		    urlWebpage = safeHavensWebPageURL.getWebPageUrl();
+		    break;
+
+		case "www.onthefastrack.com":
+		    if (onTheFastrackWebPageURL == null) {
+			onTheFastrackWebPageURL = new OnTheFastrackWebPageURL(dbgDisplay);
+		    }
+		    try {
+			urlCreator = new BillHolbrookHtmlWebPageReader(this.dbgDisplay);
+		    } catch (Exception e1) {
+			intDebugCode = 1;
+			if (dbgDisplay.thisDoesPrint(intDebugCode)) {
+			    System.out.println("Driver >> loadWindow()\n" + e1.getMessage());
+			    e1.printStackTrace();
+			}
+		    }
+		    onTheFastrackWebPageURL.setupWebPageUrl(strComicCode, ldWorkingDate);
+		    urlWebpage = onTheFastrackWebPageURL.getWebPageUrl();
+		    break;
+
+		default:
+		    intDebugCode = 1;
+		    strMsg = "DriverImageCapture->stepthroughdates";
+		    strMsg += "\n unrecognized Domain: " + csData.Domain;
+		    dbgDisplay.ShowMessage(strMsg, intDebugCode);
+		    blnOkayToContinue = false;
+		    break;
+		}
+		if (blnOkayToContinue) {
+
+		    // strWebPageUrl = urlWebpage.toString();
+		    strWebPageUrl = urlWebpage.toString();
+		    // this.UiFrame.setTextWebPageUrl(strWebPageUrl);
+		    this.UiFrame.tbxWebPageUrl.setText(strWebPageUrl);
+		    // urlCreator.setWebPageURL(goComicsWebPageURL.getWebPageUrl());
+		    urlCreator.setWebPageURL(urlWebpage);
+		    urlCreator.setImageName(strComicCode);
+		    urlCreator.setWorkingDate(ldWorkingDate);
+		    intDebugCode = 2;
+		    strMsg = "Driver->stepThroughDates blnOkayToContinue is true ";
+		    strMsg += "\n Domain: " + csData.Domain;
+		    strMsg += "\n comic code: " + strComicCode;
+		    dbgDisplay.ShowMessage(strMsg, intDebugCode);
+		    try {
+			urlCreator.parseImageUrlFromImageWebPage(csData.Domain);
+			runCaptureImage();
+			// TODO add a call to the Capture image program here and
+			// take it out of the CreateWebPageUrl object
+		    } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+
+		    ldWorkingDate = ldWorkingDate.plusDays(1);
+		    perDateRange = ldWorkingDate.until(dtEndDate);
+		    limitLoop--;
+
+		    intDebugCode = 4;
+		    strMsg = "Date range: " + perDateRange.toString();
+		    dbgDisplay.ShowMessage(strMsg, intDebugCode);
+
+		} else {
+		    break;
+		}
+	    }
+	}
+    }
+
+    private void runCaptureImage() {
+	String strImageUrl = urlCreator.getImageUrl();
+	String strImageId = urlCreator.getImageId();
+	String strImageExtention = urlCreator.getImageExtension();
+
+	boolean blnImageCaptured = captureImage.saveImageToFile(strImageUrl, strFolderToSaveImg, strImageId, strImageExtention);
+	if (blnImageCaptured) {
+	    blnImageCaptured = false;
+	}
+    }
+
+}

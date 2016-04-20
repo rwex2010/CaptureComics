@@ -1,0 +1,219 @@
+package CaptureImages;
+
+import java.net.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+//import java.util.Calendar;
+//import java.util.Date;
+import java.util.Enumeration;
+import java.io.*;
+
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.HTML.Tag;
+import javax.swing.text.html.parser.ParserDelegator;
+
+public class URLReader {
+
+    // Variables returned from the various calls
+    private String strImageUrl;
+    private LocalDate ldImageDate;
+    private String strImageDate;
+    private String strImageId = "";
+    private String strImageExtension = "jpg";
+
+    private String strImageName = "brewsterrockit";
+    private int intDebugLevel = 0;
+    private DisplayDebugMessage dbgDisplay;
+    private String strDebugMsg = "";
+    private String[] strDebugMsgArray;
+    private int intDebugCode = 512;
+
+
+    // private LocalDate ldStartingDate;
+    // private LocalDate ldEndingDate;
+    private LocalDate ldWorkingDate;
+
+    public URLReader() throws Exception {
+
+    }
+
+    public URLReader(int DebugLevel) throws Exception {
+	this.intDebugLevel = DebugLevel;
+    }
+
+    public URLReader(DisplayDebugMessage dbgDisplayObject) throws Exception {
+	this.dbgDisplay = dbgDisplayObject;
+    }
+
+    public URLReader(DisplayDebugMessage dbgDisplayObject, String imgName, LocalDate wrkingDate) throws Exception {
+	this.dbgDisplay = dbgDisplayObject;
+	this.strImageName = imgName;
+	this.ldWorkingDate = wrkingDate;
+    }
+
+    // public void createWebPageUrl() throws Exception {
+    public void createImageUrl() throws Exception {
+
+	URL urlImageWebPage = setupImageWebPageUrl();
+
+	BufferedReader in = new BufferedReader(new InputStreamReader(urlImageWebPage.openStream()));
+
+	HTMLEditorKit.Parser parser = new ParserDelegator();
+	this.intDebugCode=2;
+	this.strDebugMsg="*****URLReader.createImageUrl ***  Next is parse *****";
+	dbgDisplay.ShowMessage(strDebugMsg, intDebugCode);
+
+	SwingHtmlParser shpTest = new SwingHtmlParser();
+	// shpTest.myReader = (StringReader) reader;
+	// Reader myLineReader = new LineNumberReader(reader);
+	Reader myLineReader = new LineNumberReader(in);
+
+//	shpTest.setMyReader(myLineReader);
+	shpTest.setDebugLevel(intDebugLevel);
+
+	// String inputLine;
+	// while ((inputLine = in.readLine()) != null)
+	// System.out.println(inputLine);
+	// in.close();
+
+	try {
+	    // parser.parse(reader, new SwingHtmlParser(), true);
+	    // parser.parse(reader, shpTest, true);
+	    // reader.close();
+	    parser.parse(myLineReader, shpTest, true);
+	    myLineReader.close();
+	this.intDebugCode=2;
+	this.strDebugMsg="*****URLReader.createImageUrl *** Parsing is complete *****";
+	dbgDisplay.ShowMessage(strDebugMsg, intDebugCode);
+	} catch (IOException e) {
+
+	    System.out.println("*** IOException Error ***");
+	    System.out.println(e.getMessage());
+	    e.printStackTrace();
+
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    System.out.println("*** oops ***");
+	    System.out.println(e.getMessage());
+	    e.printStackTrace();
+	}
+	in.close();
+
+	strImageDate = shpTest.getImageStringDate();
+	ldImageDate = shpTest.getImageLocalDate();
+	strImageUrl = shpTest.getImageUrl();
+	strImageId = strImageName + strImageDate;
+
+	this.intDebugCode=1;
+	this.strDebugMsgArray = new String[5];
+	this.strDebugMsgArray[0] ="*****URLReader.createImageUrl *** Parsing is complete *****";
+	this.strDebugMsgArray[1] =  "image Url: "+strImageUrl;
+	this.strDebugMsgArray[2] =  "String Image Date: " + strImageDate;
+	this.strDebugMsgArray[3] =  "Image Date: " + ldImageDate.toString();
+	this.strDebugMsgArray[4] =  "image ID: "+strImageId;
+	dbgDisplay.ShowMessageArray(strDebugMsgArray, intDebugCode);
+
+	// TODO remove the following and just return the image URL to the
+	// calling program
+	// CaptureImageProtoType ciptImage = new
+	// CaptureImageProtoType ciptImage = new
+	// CaptureImageProtoType(intDebugLevel);
+	//
+	// // ciptImage.setImageExtension("jpg");
+	// // ciptImage.setImageId(strImageId);
+	// // ciptImage.setImageName(strImageName);
+	// // ciptImage.setImageUrl(strImageUrl);
+	// // ciptImage.setImageWidth(0);
+	// String strFolderToSaveImg =
+	// "C:/Users/wecksr/Documents/ComicStripImages/";
+	//
+	// boolean blnImageCaptured = ciptImage.saveImageToFile(strImageUrl,
+	// strFolderToSaveImg, strImageId, "jpg");
+
+    }
+
+    private URL setupImageWebPageUrl() throws MalformedURLException {
+	// TODO Determine URL of the Comic webPage
+	// for dates other than today
+	// http://www.gocomics.com/brewsterrockit/2014/05/26
+	URL returnValue;
+	LocalDate locToday = LocalDate.now();
+	String strUrl;
+	strUrl = "http://www.gocomics.com/" + strImageName;
+	if (locToday.equals(this.ldWorkingDate)) {
+	    strUrl = strUrl;
+	} else {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	    strUrl += "/" + ldWorkingDate.format(formatter);
+	}
+	
+	this.intDebugCode=1;
+	this.strDebugMsg="Web Page Url: "+strUrl;
+	dbgDisplay.ShowMessage(strDebugMsg, intDebugCode);
+
+	returnValue = new URL(strUrl);
+
+	return returnValue;
+    }
+
+    // public void setStartingDate(LocalDate ldFirstDate) {
+    // ldStartingDate = ldFirstDate;
+    // }
+    //
+    // public void setEndingDate(LocalDate ldLastDate) {
+    // ldEndingDate = ldLastDate;
+    // }
+
+    public String getImageUrl() {
+	return this.strImageUrl;
+    }
+
+    public String getImageExtension() {
+	return this.strImageExtension;
+    }
+
+    public String getImageId() {
+	return this.strImageId;
+    }
+
+    public void setWorkingDate(LocalDate ldWorkingDate) {
+	this.ldWorkingDate = ldWorkingDate;
+    }
+
+    public void setImageName(String strImageName) {
+	this.strImageName = strImageName;
+    }
+
+    public void setDebugLevel(int debugLevel) {
+	this.intDebugLevel = debugLevel;
+    }
+
+    public LocalDate getImageDate() {
+	return this.ldImageDate;
+    }
+
+    private String createStringFromReader(BufferedReader brInput) {
+	int intLineNumber = 0;
+	String htmlDocumentString = "";
+	String inputLine;
+	try {
+	    while ((inputLine = brInput.readLine()) != null) {
+		++intLineNumber;
+		htmlDocumentString += inputLine + "\n";
+		if (intDebugLevel >= 99) {
+		    System.out.println(intLineNumber + ") " + inputLine);
+		}
+	    }
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	if (intDebugLevel >= 99) {
+	    System.out.println("***********************************************************************************");
+	}
+	return htmlDocumentString;
+    }
+
+}

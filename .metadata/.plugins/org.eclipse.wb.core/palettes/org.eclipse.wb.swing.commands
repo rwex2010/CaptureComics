@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<addComponent
+		id="net.sourceforge.jdatepicker.AbstractDateModel_1406232337187"
+		name="AbstractDateModel"
+		description="Custom component: net.sourceforge.jdatepicker.AbstractDateModel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.AbstractDateModel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.DateModel_1406232337187"
+		name="DateModel"
+		description="Custom component: net.sourceforge.jdatepicker.DateModel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.DateModel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.graphics.JNextIcon_1406232337187"
+		name="JNextIcon"
+		description="Custom component: net.sourceforge.jdatepicker.graphics.JNextIcon"
+		visible="true"
+		class="net.sourceforge.jdatepicker.graphics.JNextIcon"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.graphics.JPreviousIcon_1406232337187"
+		name="JPreviousIcon"
+		description="Custom component: net.sourceforge.jdatepicker.graphics.JPreviousIcon"
+		visible="true"
+		class="net.sourceforge.jdatepicker.graphics.JPreviousIcon"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.DateComponentFormatter_1406232337187"
+		name="DateComponentFormatter"
+		description="Custom component: net.sourceforge.jdatepicker.impl.DateComponentFormatter"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.DateComponentFormatter"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePanelImpl_1406232337187"
+		name="JDatePanelImpl"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePanelImpl"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePanelImpl"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePanelImpl$1_1406232337187"
+		name="1"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePanelImpl$1"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePanelImpl$1"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalCalendarModel_1406232337187"
+		name="InternalCalendarModel"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalCalendarModel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalCalendarModel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalController_1406232337187"
+		name="InternalController"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalController"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalController"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalTableCellRenderer_1406232337187"
+		name="InternalTableCellRenderer"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalTableCellRenderer"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalTableCellRenderer"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalView_1406232337187"
+		name="InternalView"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalView"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePanelImpl$InternalView"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePickerImpl_1406232337187"
+		name="JDatePickerImpl"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePickerImpl"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePickerImpl"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePickerImpl$1_1406232337187"
+		name="1"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePickerImpl$1"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePickerImpl$1"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.JDatePickerImpl$InternalEventHandler_1406232337187"
+		name="InternalEventHandler"
+		description="Custom component: net.sourceforge.jdatepicker.impl.JDatePickerImpl$InternalEventHandler"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.JDatePickerImpl$InternalEventHandler"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.SqlDateModel_1406232337187"
+		name="SqlDateModel"
+		description="Custom component: net.sourceforge.jdatepicker.impl.SqlDateModel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.SqlDateModel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.UtilCalendarModel_1406232337187"
+		name="UtilCalendarModel"
+		description="Custom component: net.sourceforge.jdatepicker.impl.UtilCalendarModel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.UtilCalendarModel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.impl.UtilDateModel_1406232337187"
+		name="UtilDateModel"
+		description="Custom component: net.sourceforge.jdatepicker.impl.UtilDateModel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.impl.UtilDateModel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.JDateComponent_1406232337187"
+		name="JDateComponent"
+		description="Custom component: net.sourceforge.jdatepicker.JDateComponent"
+		visible="true"
+		class="net.sourceforge.jdatepicker.JDateComponent"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.JDateComponentFactory_1406232337187"
+		name="JDateComponentFactory"
+		description="Custom component: net.sourceforge.jdatepicker.JDateComponentFactory"
+		visible="true"
+		class="net.sourceforge.jdatepicker.JDateComponentFactory"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.JDatePanel_1406232337187"
+		name="JDatePanel"
+		description="Custom component: net.sourceforge.jdatepicker.JDatePanel"
+		visible="true"
+		class="net.sourceforge.jdatepicker.JDatePanel"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.JDatePicker_1406232337187"
+		name="JDatePicker"
+		description="Custom component: net.sourceforge.jdatepicker.JDatePicker"
+		visible="true"
+		class="net.sourceforge.jdatepicker.JDatePicker"
+		category="org.eclipse.wb.swing.components"/>
+	<addComponent
+		id="net.sourceforge.jdatepicker.util.JDatePickerUtil_1406232337187"
+		name="JDatePickerUtil"
+		description="Custom component: net.sourceforge.jdatepicker.util.JDatePickerUtil"
+		visible="true"
+		class="net.sourceforge.jdatepicker.util.JDatePickerUtil"
+		category="org.eclipse.wb.swing.components"/>
+</commands>

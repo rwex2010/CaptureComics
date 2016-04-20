@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;CaptureImages.CaptureImagesWindow.startDriver()&apos; to &apos;captureSelectedImages&apos;&#x0D;&#x0A;- Original project: &apos;CaptureImageProtoType&apos;&#x0D;&#x0A;- Original element: &apos;CaptureImages.CaptureImagesWindow.startDriver()&apos;&#x0D;&#x0A;- Renamed element: &apos;CaptureImages.CaptureImagesWindow.captureSelectedImages()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;startDriver&apos;" flags="589826" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;CaptureImages{CaptureImagesWindow.java[CaptureImagesWindow~startDriver" name="captureSelectedImages" references="true" stamp="1405542835676" version="1.0"/>
+</session>

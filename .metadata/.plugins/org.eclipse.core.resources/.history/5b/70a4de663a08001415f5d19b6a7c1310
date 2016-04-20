@@ -1,0 +1,407 @@
+package CaptureImages;
+
+import java.awt.EventQueue;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+
+import java.awt.Panel;
+
+import javax.swing.JTextField;
+
+import java.awt.Label;
+
+import javax.swing.JLabel;
+import javax.swing.JCheckBox;
+import javax.swing.SwingConstants;
+
+import java.awt.Button;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.List;
+
+import javax.swing.JComboBox;
+
+import com.sun.org.apache.bcel.internal.generic.LSTORE;
+
+import java.awt.Scrollbar;
+
+import javax.swing.JSpinner;
+import javax.swing.JList;
+
+import java.awt.Choice;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.awt.TextField;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.JRadioButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+public class CaptureImagesWindow {
+
+    public JFrame frame;
+    private JTextField tbxWebPageUrl;
+    private JTextField tbxImageUrl;
+    private JTextField tbxPathToSave;
+    private JTextField tbxImageDate;
+    private JTextField tbxImageId;
+    private JTextField tbxDebugLevel;
+    private List lstComicNames;
+    private JComboBox cmbxComicNames;
+    private Choice chcComicChooser;
+    private String[][] aryComics = new String[4][3];
+    private java.util.List<ComicStrip> ComicList = new ArrayList<>();
+    private boolean blnEndOfListReached = false;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+	EventQueue.invokeLater(new Runnable() {
+	    public void run() {
+		try {
+		    CaptureImagesWindow window = new CaptureImagesWindow();
+		    window.frame.setVisible(true);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	    }
+	});
+    }
+
+    /**
+     * Create the application.
+     */
+    public CaptureImagesWindow() {
+	initialize();
+    }
+
+    private void startDriver() {
+	int intDebugLevel = new Integer(tbxDebugLevel.getText());
+	DriverImageCapture imDriver = new DriverImageCapture(this, intDebugLevel);
+
+    }
+
+    public void setupComicArray() {
+	aryComics[0][0] = "Brewster Rockit";
+	aryComics[0][1] = "brewsterrockit";
+	aryComics[0][2] = "GoComics";
+
+	aryComics[1][0] = "Calvin and Hobbes";
+	aryComics[1][1] = "calvinandhobbes";
+	aryComics[1][2] = "GoComics";
+
+	aryComics[2][0] = "Herman";
+	aryComics[2][1] = "herman";
+	aryComics[2][2] = "GoComics";
+
+	aryComics[3][0] = "Luann";
+	aryComics[3][1] = "luann";
+	aryComics[3][2] = "GoComics";
+
+	int testTotalLen = aryComics.length;
+	updateTextBox(aryComics);
+
+	// updateChoiceBox(aryComics);
+
+    }
+
+    private void updateTextBox(String[][] aryImages) {
+	for (int ix = 0; ix < aryComics.length; ix++) {
+	    lstComicNames.add(aryComics[ix][0], ix);
+	}
+	lstComicNames.select(0);
+    }
+    
+    public int getComicCount() {
+	return lstComicNames.getItemCount();
+    }
+    
+    public String[] getNextComicFmList() {
+	String[] ReturnValue;
+	if (blnEndOfListReached) {
+	    ReturnValue = new String[1];
+	    ReturnValue[0] = "EOF";
+	} else {
+    	int intSelectedIndex = lstComicNames.getSelectedIndex();
+    	ReturnValue = aryComics[intSelectedIndex];
+    	intSelectedIndex++;
+    	if (intSelectedIndex < lstComicNames.getItemCount()) {
+    	    intSelectedIndex = lstComicNames.getItemCount() - 1;
+    	    blnEndOfListReached = true;
+    	}
+	}
+	return ReturnValue;
+    }
+
+    private void updateChoiceBox() {
+	// for (int ix = 0; ix < ComicList.length; ix++) {
+	// chcComicChooser.add(aryImages[ix][0]);
+	// }
+	int cntr = 0;
+	for (ComicStrip cs : ComicList) {
+	    // type type = (type) iterator.next();
+	    ++cntr;
+
+	    chcComicChooser.add(cs.ComicName);
+
+	    if (cntr > 300) {
+		break;
+	    }
+
+	}
+    }
+
+    public void setComicList(java.util.List<ComicStrip> ComicList) {
+	this.ComicList = ComicList;
+	updateChoiceBox();
+    }
+
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+	frame = new JFrame();
+	frame.setBounds(100, 100, 662, 722);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.getContentPane().setLayout(null);
+
+	Panel panel = new Panel();
+	panel.setBounds(10, 10, 332, 50);
+	frame.getContentPane().add(panel);
+	panel.setLayout(null);
+
+	tbxWebPageUrl = new JTextField();
+	tbxWebPageUrl.setBounds(27, 23, 261, 20);
+	panel.add(tbxWebPageUrl);
+	tbxWebPageUrl.setColumns(10);
+
+	Label label = new Label("Web Page URL:");
+	label.setBounds(10, 0, 104, 22);
+	panel.add(label);
+
+	Panel panel_1 = new Panel();
+	panel_1.setLayout(null);
+	panel_1.setBounds(10, 63, 332, 50);
+	frame.getContentPane().add(panel_1);
+
+	tbxImageUrl = new JTextField();
+	tbxImageUrl.setColumns(10);
+	tbxImageUrl.setBounds(27, 23, 261, 20);
+	panel_1.add(tbxImageUrl);
+
+	Label label_1 = new Label("Image URL:");
+	label_1.setBounds(10, 0, 104, 22);
+	panel_1.add(label_1);
+
+	Panel panel_2 = new Panel();
+	panel_2.setLayout(null);
+	panel_2.setBounds(10, 119, 332, 50);
+	frame.getContentPane().add(panel_2);
+
+	tbxPathToSave = new JTextField();
+	tbxPathToSave.setText("C:/Users/wecksr/Documents/ComicStripImages/");
+	tbxPathToSave.setColumns(10);
+	tbxPathToSave.setBounds(20, 23, 302, 20);
+	panel_2.add(tbxPathToSave);
+
+	Label label_2 = new Label("Path where to save image");
+	label_2.setBounds(10, 0, 151, 22);
+	panel_2.add(label_2);
+
+	Panel panel_3 = new Panel();
+	panel_3.setLayout(null);
+	panel_3.setBounds(10, 175, 126, 50);
+	frame.getContentPane().add(panel_3);
+
+	tbxImageDate = new JTextField();
+	tbxImageDate.setColumns(10);
+	tbxImageDate.setBounds(20, 19, 94, 20);
+	panel_3.add(tbxImageDate);
+
+	Label label_3 = new Label("Image Date");
+	label_3.setBounds(10, 0, 104, 22);
+	panel_3.add(label_3);
+
+	Panel panel_4 = new Panel();
+	panel_4.setLayout(null);
+	panel_4.setBounds(142, 175, 126, 50);
+	frame.getContentPane().add(panel_4);
+
+	tbxImageId = new JTextField();
+	tbxImageId.setColumns(10);
+	tbxImageId.setBounds(20, 19, 94, 20);
+	panel_4.add(tbxImageId);
+
+	Label label_4 = new Label("Image ID");
+	label_4.setBounds(10, 0, 104, 22);
+	panel_4.add(label_4);
+
+	JPanel panel_5 = new JPanel();
+	panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+	panel_5.setBounds(10, 299, 126, 290);
+	frame.getContentPane().add(panel_5);
+	panel_5.setLayout(null);
+
+	JLabel lblPublisher = new JLabel("Domain");
+	lblPublisher.setHorizontalAlignment(SwingConstants.CENTER);
+	lblPublisher.setBounds(0, 0, 120, 25);
+	panel_5.add(lblPublisher);
+
+	JCheckBox chkbxGoComics = new JCheckBox("gocomics");
+	chkbxGoComics.setBounds(6, 47, 114, 23);
+	panel_5.add(chkbxGoComics);
+
+	JCheckBox chkbxArcamax = new JCheckBox("Arcamax");
+	chkbxArcamax.setBounds(6, 73, 114, 23);
+	panel_5.add(chkbxArcamax);
+
+	JCheckBox chkbxKingfeatures = new JCheckBox("Kingfeatures");
+	chkbxKingfeatures.setBounds(6, 103, 114, 23);
+	panel_5.add(chkbxKingfeatures);
+
+	JCheckBox chkbxDilbert = new JCheckBox("Dilbert");
+	chkbxDilbert.setBounds(6, 129, 114, 23);
+	panel_5.add(chkbxDilbert);
+
+	JCheckBox chkbxMediaZenfs = new JCheckBox("Media Zenfs");
+	chkbxMediaZenfs.setBounds(6, 207, 114, 23);
+	panel_5.add(chkbxMediaZenfs);
+
+	JCheckBox chkbxSafeHavens = new JCheckBox("Safe Havens");
+	chkbxSafeHavens.setBounds(6, 233, 114, 23);
+	panel_5.add(chkbxSafeHavens);
+
+	JCheckBox chkbxUComics = new JCheckBox("U Comics");
+	chkbxUComics.setBounds(6, 155, 114, 23);
+	panel_5.add(chkbxUComics);
+
+	JCheckBox chkbxKevinAndKell = new JCheckBox("Kevin and Kell");
+	chkbxKevinAndKell.setBounds(6, 181, 114, 23);
+	panel_5.add(chkbxKevinAndKell);
+	
+	JCheckBox chkbxFastrack = new JCheckBox("On the Fastrack");
+	chkbxFastrack.setBounds(6, 259, 114, 23);
+	panel_5.add(chkbxFastrack);
+	
+	JCheckBox chkbxAll = new JCheckBox("All");
+	chkbxAll.setBounds(0, 21, 114, 23);
+	panel_5.add(chkbxAll);
+
+	Panel panel_6 = new Panel();
+	panel_6.setLayout(null);
+	panel_6.setBounds(290, 175, 83, 44);
+	frame.getContentPane().add(panel_6);
+
+	tbxDebugLevel = new JTextField();
+	tbxDebugLevel.setToolTipText("0=none; 9=maximum");
+	tbxDebugLevel.setHorizontalAlignment(SwingConstants.CENTER);
+	tbxDebugLevel.setText("0");
+	tbxDebugLevel.setColumns(4);
+	tbxDebugLevel.setBounds(10, 19, 52, 20);
+	panel_6.add(tbxDebugLevel);
+
+	Label label_5 = new Label("Debug Level");
+	label_5.setBounds(10, 0, 63, 22);
+	panel_6.add(label_5);
+
+	Button btnStart = new Button("Start");
+	btnStart.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		startDriver();
+	    }
+	});
+	btnStart.setBounds(337, 281, 70, 22);
+	frame.getContentPane().add(btnStart);
+
+	lstComicNames = new List();
+	lstComicNames.setMultipleSelections(false);
+	lstComicNames.setBounds(475, 272, 141, 31);
+	frame.getContentPane().add(lstComicNames);
+
+	cmbxComicNames = new JComboBox();
+	cmbxComicNames.setBounds(475, 323, 141, 44);
+	frame.getContentPane().add(cmbxComicNames);
+
+	JSpinner spinner = new JSpinner();
+	spinner.setBounds(475, 399, 143, 20);
+	frame.getContentPane().add(spinner);
+	
+	JPanel panel_7 = new JPanel();
+	panel_7.setBounds(146, 299, 126, 110);
+	frame.getContentPane().add(panel_7);
+	
+	JLabel lblWhichComics = new JLabel("Which Comics");
+	
+	JRadioButton radAllComics = new JRadioButton("All");
+	
+	JRadioButton radMyComics = new JRadioButton("My Comics");
+	radMyComics.setSelected(true);
+	
+	JRadioButton radNotMyComics = new JRadioButton("Not My Comics");
+	GroupLayout gl_panel_7 = new GroupLayout(panel_7);
+	gl_panel_7.setHorizontalGroup(
+		gl_panel_7.createParallelGroup(Alignment.LEADING)
+			.addComponent(lblWhichComics, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+			.addGroup(Alignment.TRAILING, gl_panel_7.createSequentialGroup()
+				.addGap(7)
+				.addComponent(radMyComics, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+				.addContainerGap())
+			.addGroup(gl_panel_7.createSequentialGroup()
+				.addContainerGap()
+				.addComponent(radNotMyComics, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+				.addContainerGap())
+			.addGroup(Alignment.TRAILING, gl_panel_7.createSequentialGroup()
+				.addContainerGap()
+				.addComponent(radAllComics, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+				.addContainerGap())
+	);
+	gl_panel_7.setVerticalGroup(
+		gl_panel_7.createParallelGroup(Alignment.LEADING)
+			.addGroup(gl_panel_7.createSequentialGroup()
+				.addGap(9)
+				.addComponent(lblWhichComics, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(radAllComics)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(radMyComics)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(radNotMyComics)
+				.addGap(18))
+	);
+	panel_7.setLayout(gl_panel_7);
+	
+	ButtonGroup btngpWhichComics  = new ButtonGroup();
+	btngpWhichComics.add(radNotMyComics);
+	btngpWhichComics.add(radMyComics);
+	btngpWhichComics.add(radAllComics);
+	
+	JPanel panel_8 = new JPanel();
+	panel_8.setBounds(10, 230, 272, 58);
+	frame.getContentPane().add(panel_8);
+	panel_8.setLayout(null);
+	
+		chcComicChooser = new Choice();
+		chcComicChooser.setBounds(0, 35, 272, 20);
+		panel_8.add(chcComicChooser);
+		
+		JLabel lblComicImage = new JLabel("Comic / Image List");
+		lblComicImage.setBounds(0, 11, 139, 18);
+		panel_8.add(lblComicImage);
+    }
+}

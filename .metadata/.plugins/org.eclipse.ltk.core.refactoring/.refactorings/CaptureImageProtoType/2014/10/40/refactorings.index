@@ -1,0 +1,3 @@
+1412173539136	Extract method 'findWebPageUrlForThisComic'
+1412173588821	Rename method 'findImageUrl'
+1412261488263	Extract method 'findImageUrlForThisComic'

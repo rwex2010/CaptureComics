@@ -1,0 +1,26 @@
+1408997894922	Rename local variable 'strMsg'
+1408998020101	Rename local variable 'strMsg'
+1408998046546	Rename local variable 'strMsg'
+1408998106590	Rename local variable 'strMsg'
+1408998170729	Rename local variable 'strMsg'
+1408998192165	Rename local variable 'strMsg'
+1408998212520	Rename local variable 'strMsg'
+1408998232501	Rename local variable 'strMsg'
+1408998253902	Rename local variable 'strMsg'
+1408998270145	Rename local variable 'strMsg'
+1408998286248	Rename local variable 'strMsg'
+1409022376137	Rename local variable 'shpTest'
+1409022506329	Rename local variable 'in'
+1409022810221	Rename method 'createImageUrl'
+1409176276135	Rename field 'ciptImage'
+1409192925414	Rename type 'DOMParserDemo'
+1409193067032	Rename type 'CaptureImagesWindow'
+1409193704658	Delete element
+1409193994666	Rename type 'SwingHtmlParser'
+1409195379281	Rename field 'iwpuWebPageUrl'
+1409241905377	Delete element
+1409252255410	Rename field 'dtFormatter'
+1409260013763	Delete element
+1409348544542	Copy compilation unit
+1409350627936	Rename method 'SafeHavensParseImageFromWebPage'
+1409350705040	Rename type 'SafeHavensWebPageHtmlParser'

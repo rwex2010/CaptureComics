@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CaptureComicProtoType&apos; to &apos;ExtractAllImageTags&apos;" description="Rename resource &apos;CaptureComicProtoType&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/CaptureComicProtoType" name="ExtractAllImageTags" stamp="1398698437973" updateReferences="true"/>
+</session>

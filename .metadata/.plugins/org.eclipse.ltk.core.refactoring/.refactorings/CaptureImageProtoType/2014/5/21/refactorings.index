@@ -1,0 +1,7 @@
+1400452184830	Rename local variable 'strId'
+1400694561329	Rename field 'blnFountH1'
+1400694586062	Rename field 'blnFountDate'
+1400787432232	Rename method 'FindRightHrefWithDate'
+1400788079615	Rename local variable 'blnReturnValue'
+1400806575808	Delete element
+1400854037624	Rename local variable 'oracle'

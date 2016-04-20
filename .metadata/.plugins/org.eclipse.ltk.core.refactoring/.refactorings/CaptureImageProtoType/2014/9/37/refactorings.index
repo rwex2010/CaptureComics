@@ -1,0 +1,23 @@
+1410134213666	Rename type 'MediaZenfs'
+1410204400068	Rename field 'dilbertWebPageURL'
+1410204532309	Rename field 'dilbertFindImageUrl'
+1410209823704	Delete element
+1410209974133	Delete element
+1410210135808	Delete element
+1410210455161	Delete element
+1410211110041	Delete element
+1410213468783	Rename local variable 'strDivId'
+1410214827325	Rename local variable 'blnReturnVAlue'
+1410271497329	Copy compilation unit
+1410272196918	Rename field 'mediaZenfsFindImageUrl'
+1410272617417	Rename field 'strMediaZenfsServer'
+1410291320314	Rename field 'goComicsWebPageURL'
+1410291345194	Rename field 'goComicsFindImageUrl'
+1410356315915	Rename method 'FindRightDivTag'
+1410356478773	Rename local variable 'strDivClass'
+1410357442864	Rename method 'findRightInputTag'
+1410359599580	Rename local variable 'strInputName'
+1410447378535	Rename field 'strPrevImageUrl'
+1410483638173	Rename field 'dilbertWebPageURL'
+1410483699861	Rename field 'dilbertFindImageUrl'
+1410483881083	Rename type 'DilbertImageWebPageURL'

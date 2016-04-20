@@ -1,0 +1,112 @@
+package CaptureImages;
+
+//import java.awt.Image;
+import java.awt.image.BufferedImage;
+//import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+//import javax.swing.ImageIcon;
+//import javax.swing.JFrame;
+//import javax.swing.JLabel;
+
+public class CaptureImage {
+
+//    private String strImageEextension = "jpg";
+//    private String strImageUrl = "http://assets.amuniversal.com/e896b6909fbf01311e4b005056a9545d";
+//    private String strImageName = "BC";
+//    private String strFolderToWrite = "C:/Users/wecksr/Documents/ComicStripImages/";
+//    private String strFolderToWrite = "C:/Users/Rich/Documents/ComicStripImages/";
+    
+    private int avatarnum = 1;
+    private BufferedImage image = null;
+    private String strImageEextension = "";
+    private String strImageId = "";
+    private String strImageUrl = "";
+    private int intImageWidth;
+    private String strFolderToWrite = "";
+    private int intDebugLevel = 0;
+
+    public CaptureImage() {
+
+    }
+
+    public CaptureImage(int DebugLevel) {
+	this.intDebugLevel = DebugLevel;
+    }
+
+    public boolean saveImageToFile(String imageUrl, String folderToSaveImage, String imageId, String imageExtension) {
+	boolean blnReturnValue = false;
+	
+	this.strImageUrl = imageUrl;
+	this.strFolderToWrite = folderToSaveImage;
+	this.strImageId=imageId;
+	this.strImageEextension=imageExtension;
+
+	try {
+	    String strImageFullUrl = strImageUrl;
+	    if (intImageWidth > 0) {
+		strImageFullUrl += "?width=" + intImageWidth;
+	    }
+	    URL url = new URL(strImageFullUrl);
+	    image = ImageIO.read(url);
+
+	    if (intDebugLevel >= 2) {
+		String[] strPropertyNames = image.getPropertyNames();
+		if (strPropertyNames == null) {
+		    System.out.println("Image Properties are null");
+		} else {
+		    System.out.println("Image Properties: " + strPropertyNames.length);
+		    for (int ix = 0; ix < strPropertyNames.length; ix++) {
+			System.out.println("[" + ix + "] " + strPropertyNames[ix]);
+		    }
+		}
+	    }
+	    try {
+		String strImageFileId = strImageId;
+
+		String strFullPathToWriteImage = strFolderToWrite + strImageFileId + "." + strImageEextension;
+		ImageIO.write(image, strImageEextension, new File(strFullPathToWriteImage));
+		if (intDebugLevel >= 1) {
+		    System.out.println("Write successful: " + strFullPathToWriteImage);
+		}
+		avatarnum++;
+	    } catch (Exception e) {
+		System.out.println("Printing stacktrace");
+		e.printStackTrace();
+	    }
+	    avatarnum++;
+
+	} catch (IOException e) {
+	    System.out.println("File not found! " + avatarnum);
+	    System.out.println("Adding one to variable and retrying..");
+	    avatarnum++;
+	}
+
+	if (this.intDebugLevel >= 3) {
+	    System.out.println("Done");
+	}
+	return blnReturnValue;
+    }
+
+    public void setImageUrl(String ImgUrl) {
+	strImageUrl = ImgUrl;
+    }
+
+//    public void setImageName(String ImgName) {
+//	strImageName = ImgName;
+//    }
+
+    public void setImageExtension(String ImgExt) {
+	strImageEextension = ImgExt;
+    }
+
+    public void setImageId(String ImgId) {
+	strImageId = ImgId;
+    }
+
+    public void setImageWidth(int ImgWdth) {
+	intImageWidth = ImgWdth;
+    }
+}

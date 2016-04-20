@@ -1,0 +1,24 @@
+1409539763379	Rename type 'URLReader'
+1409539856294	Copy compilation unit
+1409540972704	Rename type 'GoComicsHtmlWebPageReader'
+1409541389584	Delete element
+1409546490796	Delete element
+1409800511355	Rename method 'runCreateUrl'
+1409801947381	Delete element
+1409838772520	Rename local variable 'strMsg'
+1409838825155	Rename local variable 'strMsg'
+1409838845482	Rename local variable 'strMsg'
+1409838883378	Rename local variable 'strMsg'
+1409869853610	Rename field 'urlCreator'
+1409890786973	Rename field 'urlCreator'
+1409891127749	Rename type 'DilbertWebPageURL'
+1409893454912	Rename field 'dilbertFindImageUrl'
+1409893845188	Rename type 'SafeHavensWebPageURL'
+1409893933574	Rename field 'dilbertWebPageURL'
+1409929168064	Rename field 'intCurrentIndex'
+1409957434775	Rename type 'OnTheFastrackWebPageURL'
+1409957474090	Rename field 'safeHavensWebPageURL'
+1409957508828	Rename field 'safeHavensFindImageUrl'
+1410032932856	Rename type 'KevinAndKellWebPageURL'
+1410033133698	Rename field 'onTheFastrackWebPageURL'
+1410033209736	Rename field 'onTheFastrackFindImageUrl'
